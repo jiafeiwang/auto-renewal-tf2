@@ -1,0 +1,29 @@
+1:
+  model_required:
+    rescind: 1
+    refund: 1
+    pay: 0
+  model_param:
+    hidden_units: [128,64]
+    ak_dim: 8
+    dropout: 0.2
+
+2:
+  model_required:
+    rescind: 1
+    refund: 1
+    pay: 1
+  model_param:
+    hidden_units: [128,64]
+    ak_dim: 8
+    dropout: 0.25
+
+3:
+  model_required:
+    rescind: 1
+    refund: 1
+    pay: 1
+  model_param:
+    hidden_units: [ 128,64 ]
+    ak_dim: 8
+    dropout: 0.3

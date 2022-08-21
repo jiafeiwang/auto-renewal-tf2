@@ -1,0 +1,23 @@
+estimate_order:
+  - rescind_1 # 0
+  - refund_1 # 1
+  - pay_2
+  - rescind_2
+  - refund_2
+  - pay_3
+  - rescind_3
+  - refund_3 # 7
+
+# estimate start from which model
+estimate_required:
+  1:
+    # in T1, paid_no = 1, start from rescind_1
+    1: 0 # rescind_1
+  2:
+    # in T2, paid_no = 1, start from pay_2
+    1: 2 # pay_2
+    # in T2, paid_no = 2, start from rescind_2
+    2: 3 # rescind_2
+  3:
+    2: 5 # pay_3
+    3: 6 # rescind_3

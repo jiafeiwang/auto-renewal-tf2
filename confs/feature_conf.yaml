@@ -1,0 +1,47 @@
+
+dense_feature_info:
+    - name: dense_col1
+      idx: 0,
+    - name: dense_col2
+      idx: 1,
+#    other dense_feature
+
+spase_feature_info:
+    - name: sparse_col1
+      idx: 2
+      onehot_dims: # None
+      embed_dims: 8
+    - name: sparse_col2
+      idx: 3
+      onehot_dims: #None
+      embed_dims: 8
+#    other sparse_feature
+
+behavior_feature_info:
+  -
+    - name: bahavior_col1_r1
+      idx: 20
+      onehot_dims: # None
+      embed_dims: 8
+    - name: bahavior_col2_r1
+      idx: 21
+      onehot_dims: # None
+      embed_dims: 8
+  -
+    - name: bahavior_col1_r2
+      idx: 22
+      onehot_dims: # None
+      embed_dims: 8
+    - name: bahavior_col2_r2
+      idx: 23
+      onehot_dims: # None
+      embed_dims: 8
+  -
+    - name: bahavior_col1_r3
+      idx: 22
+      onehot_dims: # None
+      embed_dims: 8
+    - name: bahavior_col2_r3
+      idx: 23
+      onehot_dims: # None
+      embed_dims: 8
