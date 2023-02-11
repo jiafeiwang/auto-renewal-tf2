@@ -1,13 +1,14 @@
-# auto-renewal-tf2
+# 按期支付订单续期率预估
 <p align="left">
   <img src='https://img.shields.io/badge/python-3.7-blue'>
   <img src='https://img.shields.io/badge/tensorflow-2.1.0-brightgreen'>
   <img src='https://img.shields.io/badge/keras-2.2.4-brightgreen'>
 </p>  
 
-自动续费，如月缴会员场景：   
-开通时签约微信或支付保自动续费，每个月到扣费日（D）进行自动扣费，连续扣30日，直至扣费成功，D+30后扣费不成功会员订单失效；  
-扣费后用户在[D, D+30]内可以选择关闭自动续费或申请退费，关闭自动续费或退费后会员订单失效。  
+模型介绍链接：https://juejin.cn/post/7067191709536518180
+
+分期支付场景，开通时签约微信或支付保自动续费，每个月到扣费日（D）进行自动扣费，连续扣30日，直至扣费成功，D+30后扣费不成功会员订单失效；  
+扣费后用户在[D, D+30]内可以选择关闭自动续费（解约）或申请退费，关闭自动续费或退费后会员订单失效。  
 
 本项目搭建了DNN模型用来预估订单D~D+30日内（output_dim=31）的扣费成功（P）、关闭自动续费（C）、退费（R）的概率分布，模型结构类似于PNN，
 product方式为Inner product，deep部分为MLP；  
