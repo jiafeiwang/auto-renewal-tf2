@@ -4,19 +4,19 @@
 
 import  os
 import tensorflow as tf
-from utils.conf_utils import  get_predict_conf
+from utils.conf_utils import get_predict_conf
 from utils.data_utils import get_predict_data
-from models.joint import JointNNClassifier
+from models.joint import DNNClassifier
 
 def prob2rate(prob,days):
     """
     :param prob: [n_sample, 31] 前30列为每月30日内（索引0~29）行为发生的概率分布，第31列为行为不发生的概率
-    :param days: [n_sample, 1] 样本当前已经历的天（-1~29），-1表示当前期次还未到，0表示已经历了第0天
+    :param days: [n_sample, 1] 样本当前已经历的天（-1~29），-1表示当前期次还未到，0表示处在第1天
     :return:[n_sample,1]
     根据行为发生的概率分布prob与已经历的天days，计算样本已过n日行为仍未发生，但在未来仍然可能发生的概率
     """
     if prob.shape[0] != days.shape[0]:
-        raise ValueError("the shape[0] of pred and days are not equal!")
+        raise ValueError("the sample num of pred and days are not equal!")
     if prob.shape[1] != 31:
         raise ValueError("Unexpected pred shape[1] %d, expect 31" % (prob.shape[1]))
 
@@ -31,7 +31,7 @@ def prob2rate(prob,days):
     return rate
 
 
-def estimate_rate(pred_data,model):
+def estimate_rate(pred_data, model):
     """
     :param pred_data:
     :param model:
@@ -45,7 +45,7 @@ def estimate_rate(pred_data,model):
 if __name__ == "__main__":
     estimate_order, estimate_required = get_predict_conf()
     estimate_nums = len(estimate_order)
-    model = JointNNClassifier()
+    model = DNNClassifier()
     predict_res = []
     for t, pay_info in estimate_required.items():
         for n, start_idx in pay_info.items():

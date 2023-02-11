@@ -5,7 +5,11 @@ import tensorflow as tf
 from tensorflow.keras.layers import Layer
 import tensorflow.keras.backend as bk
 
+
 class InnerProductLayer(Layer):
+    """
+    计算特征内积
+    """
     def __init__(self):
         super(InnerProductLayer, self).__init__()
 
@@ -15,10 +19,10 @@ class InnerProductLayer(Layer):
                 "Unexpected inputs dimensions %d, expect 3 dimensions" % (bk.ndim(inputs))
             )
 
-        field_num = inputs.shape[0]
+        field_num = inputs.shape[1]
 
         idx_i, idx_j = [], []
-        for i in range(field_num):
+        for i in range(field_num-1):
             for j in range(i + 1, field_num):
                 idx_i.append(i)
                 idx_j.append(j)
@@ -27,7 +31,11 @@ class InnerProductLayer(Layer):
         product = tf.reduce_sum(i_interaction * j_interaction, axis=-1, keepdims=False)
         return product
 
+
 class OuterProductLayer(Layer):
+    """
+    计算特征外积
+    """
     def __init__(self, reg_w):
         super(OuterProductLayer, self).__init__()
         self.reg_w = reg_w

@@ -9,12 +9,15 @@ from tensorflow.keras.models import Model
 
 class Embeds(Model):
     def __init__(self, sparse_feature_info, is_concat=False):
+        """
+        :param sparse_feature_info: e.y. [{name:'S1', idx:10, 'onehot_dim':12215, 'embed_size':128},
+        #                                 {name:'S2', idx:11, 'onehot_dim':327621,'embed_size':128}...]
+        :param is_concat: 是否将多个field Embedding之后的输出进行concatenate
+        """
         super(Embeds, self).__init__()
         self.sparse_feature_info = sparse_feature_info
         self.is_concat = is_concat
-
-    def build(self, input_shape):
-        self.embed_layers = {sfeat['name']: Embedding(sfeat['onehot_dims'], sfeat['embed_dims'])
+        self.embed_layers = {sfeat['name']: Embedding(sfeat['onehot_dim'], sfeat['embed_size'])
                              for sfeat in self.sparse_feature_info}
 
     def call(self, inputs, training=None, mask=None):

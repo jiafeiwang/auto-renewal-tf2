@@ -1,7 +1,6 @@
-
 import os
 
-from models.joint import JointNNClassifier
+from models.joint import DNNClassifier
 from utils.data_utils import get_train_data
 from utils.conf_utils import get_train_conf, get_feature_info
 
@@ -25,15 +24,15 @@ if __name__ == '__main__':
             if req == 0:
                 continue
             model_name = f'{act}_{m}'
-            model = JointNNClassifier(dense_feature_info,sparse_feature_info,behavior_feature_info,
-                                      hidden_units,ak_dim,dropout)
+            model = DNNClassifier(dense_feature_info, sparse_feature_info, behavior_feature_info,
+                                  hidden_units, ak_dim, dropout)
 
             optimizer = Adam(0.005)
             batch_size, epochs = 32, 30
             summary_writer_dir = os.path.join(os.getcwd(), 'output', 'tensorboard', 'callback', model_name)
             checkpoint_path = os.path.join(os.getcwd(), 'output', 'model_files', 'checkpoint', f'{model_name}.ckpt')
 
-            X_train, y_train, X_val, y_val = get_train_data(m,act)
+            X_train, y_train, X_val, y_val = get_train_data(m, act)
 
             # 定义checkpoint和tensorboard的回调函数
             cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,

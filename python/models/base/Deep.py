@@ -14,12 +14,11 @@ class Deep(Model):
         self.dropout = dropout
         self.output_unit = output_unit
 
-    def build(self, input_shape):
-        self.dense_layers = [Dense(h,activation=self.activation) for h in self.hidden_units]
+        self.dense_layers = [Dense(h, activation=self.activation) for h in self.hidden_units]
         self.dropout_layer = None
         if self.dropout is not None:
             self.dropout_layer = Dropout(self.dropout)
-        self.output_layer = Dense(self.output_unit,activation=None)
+        self.output_layer = Dense(self.output_unit, activation=None)
 
     def call(self, inputs, training=None, mask=None):
         x = inputs
